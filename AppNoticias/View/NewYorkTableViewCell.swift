@@ -26,10 +26,25 @@ class NewYorkTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func prepare(with news: ResultNews) {
+    func prepare(with news: NewsData) {
         title.text = news.title
         by.text = news.byline
-        imageNews.image = UIImage(named: "17malcolmx-mediumThreeByTwo440-v2")
+        
+        guard let url = URL(string: news.image) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.imageNews.image = UIImage(data: data)
+            }
+
+            
+        }.resume()
     }
 
 }

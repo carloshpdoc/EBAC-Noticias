@@ -7,8 +7,12 @@
 
 import Foundation
 
-// MARK: - NewYorkNews
-struct ResponseNews: Codable { //  Decodable & Encodable
+struct ResponseElement: Codable {
+    let home: Home
+}
+
+// MARK: - Home
+struct Home: Codable { //  Decodable & Encodable
 
     let status, copyright: String
     let numResults: Int
