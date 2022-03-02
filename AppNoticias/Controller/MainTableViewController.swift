@@ -14,7 +14,7 @@ class MainTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         showActivityIndicatior()
 
         NetworkManager.shared.getNews { [weak self] result  in
