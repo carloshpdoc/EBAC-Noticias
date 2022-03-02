@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -26,16 +25,14 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if Auth.auth().currentUser != nil {
-            self.completeLogin()
-        }
+        // TODO: Check current user
     }
     
     @objc
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         let signUpController = SignUpController()
+        
         // TODO: delegate
-        signUpController.delegate = self
 
         self.present(signUpController, animated: true, completion: nil)
     }
@@ -48,17 +45,7 @@ class LoginViewController: UIViewController {
             guard let email = userTextField.text, !email.isEmpty else { return }
             guard let password = passwordTextField.text, !password.isEmpty else { return }
             
-            
-            Auth.auth().signIn(withEmail: email, password: password, completion: { [self] (user, error) in
-                
-                if error != nil {
-                    dispatchAlert(nil, message: "Falhou para logar o usuario com email e senha")
-                }
-                
-                print("Yes login feito!")
-                
-                completeLogin()
-            })
+            // TODO: SignIn user
         }
     }
     
@@ -79,9 +66,4 @@ class LoginViewController: UIViewController {
     }
 }
 
-// TODO: delegate
-extension LoginViewController: SignUpControllerDelegate {
-    func didSignUpComplete() {
-        completeLogin()
-    }
-}
+// TODO: delegate extension

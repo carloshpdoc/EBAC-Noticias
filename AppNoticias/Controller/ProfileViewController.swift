@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Firebase
 
 class ProfileViewController: UIViewController  {
     @IBOutlet weak var logout: UIButton!
@@ -15,15 +14,6 @@ class ProfileViewController: UIViewController  {
     
     @IBAction func logoutAction(_ sender: Any) {
        // TODO Logout
-        do {
-            try Auth.auth().signOut()
-            let loginViewController = self.storyboard?.instantiateInitialViewController()
-            self.present(loginViewController!, animated: true, completion: nil)
-
-        } catch let signOutError {
-            print("signOutError: \(signOutError)")
-            dispatchAlert("Error", message: signOutError.localizedDescription)
-        }
     }
     
     override func viewDidLoad() {
@@ -39,7 +29,6 @@ class ProfileViewController: UIViewController  {
         logout.setTitle("Sair", for: .normal)
 
         // TODO display email
-        let userEmail = Auth.auth().currentUser?.email
-        userEmailLabel.text = userEmail
+
     }
 }

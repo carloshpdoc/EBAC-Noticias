@@ -6,17 +6,12 @@
 //
 
 import UIKit
-import Firebase
 
 // TODO: protocol delegate
-protocol SignUpControllerDelegate: AnyObject {
-    func didSignUpComplete()
-}
 
 class SignUpController: UIViewController {
     
-    // TODO: delegate
-    weak var delegate: SignUpControllerDelegate?
+    // TODO: delegate var
     
     lazy var emailTextField: UITextField = {
         let email = UITextField()
@@ -74,22 +69,7 @@ class SignUpController: UIViewController {
         guard let password = passwordTextField.text, !password.isEmpty else { return }
 
         // TODO: Auth create user
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
-            
-            if let err = error {
-                print("Error:", err)
-                print("Email:", email)
-                
-                self.dispatchAlert("Error", message: "\(err) with email: \(email)")
-                
-                return
-            }
-            
-            print("Success userId:", user?.user.uid ?? "")
-            self.delegate?.didSignUpComplete()
-            self.dismiss(animated: true, completion: nil)
-            
-        })
+
     }
     
     lazy var alreadyHaveAccountButton: UIButton = {
