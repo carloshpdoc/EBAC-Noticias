@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class LoginViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupLabelPressed: UILabel!
     
+    var dataController: DataController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,6 +68,13 @@ class LoginViewController: UIViewController {
     private func completeLogin() {
         DispatchQueue.main.async {
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MainNavigationController") as! UINavigationController
+            
+            let rootViewController = controller.topViewController as! UITabBarController
+            
+            let mainTableViewController = rootViewController.viewControllers![0] as! MainTableViewController
+            
+            mainTableViewController.dataController = self.dataController
+            
             self.present(controller, animated: true, completion: nil)
         }
     }

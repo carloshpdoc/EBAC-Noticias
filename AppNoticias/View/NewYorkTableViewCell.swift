@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class NewYorkTableViewCell: UITableViewCell {
 
@@ -22,29 +23,5 @@ class NewYorkTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
-    func prepare(with news: NewsData) {
-        title.text = news.title
-        by.text = news.byline
-        
-        guard let url = URL(string: news.image) else {
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.imageNews.image = UIImage(data: data)
-            }
-
-            
-        }.resume()
-    }
-
 }
